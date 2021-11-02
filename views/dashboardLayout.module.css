@@ -1,6 +1,8 @@
 .logo {
     color: var(--white-color);
     filter: brightness(0.85);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .navButtons {

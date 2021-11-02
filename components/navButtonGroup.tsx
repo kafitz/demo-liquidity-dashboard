@@ -14,6 +14,8 @@ interface NavButtonGroupProps {
         path: string;
     }[];
     defaultValue?: string;
+    navGroupActive?: boolean;
+    onClick?: () => void;
 };
 
 const NavButtonGroup = (props: NavButtonGroupProps) => {
@@ -25,13 +27,22 @@ const NavButtonGroup = (props: NavButtonGroupProps) => {
         if (defaultIdx > -1) setActiveIdx(defaultIdx);
     }, []);
 
+    useEffect(() => {
+        if (!props.navGroupActive) setActiveIdx(undefined);
+    }, [props.navGroupActive]);
+
+    const handleOnClick = (idx: number) => {
+        setActiveIdx(idx);
+        if (props.onClick) props.onClick();
+    }
+
     return (
         <ButtonGroup variant='outlined' aria-label='outlined button group'>
             { props.items.map((item, idx) => (
                 <Link key={idx} href={item.path}>
                     <Button
                         className={classNames(styles.nav, activeIdx === idx && styles.active)}
-                        onClick={() => setActiveIdx(idx)}
+                        onClick={() => handleOnClick(idx)}
                     >
                         {item.label}
                     </Button>

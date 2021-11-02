@@ -3,7 +3,6 @@ import { GetStaticPropsContext } from 'next';
 import fs from 'fs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import subDays from 'date-fns/subDays';
 
 import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
 import DashboardCard from '../../components/dashboardCard';

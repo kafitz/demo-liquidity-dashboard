@@ -1,5 +1,6 @@
 /* ./views/DashboardLayout.tsx */
-import React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
@@ -12,13 +13,20 @@ interface DashboardLayoutProps {
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
-
+    const [navGroupActive, setNavGroupActive] = useState(false);
 
     return (
         <Container maxWidth={false} sx={{ marginTop: 1 }}>
-            <Typography variant='h4' className={styles.logo}>
-                DFX Dashboard
-            </Typography>
+            <Link href='/'>
+                <a 
+                    className={styles.logo}
+                    onClick={() => setNavGroupActive(false)}
+                >
+                    <Typography variant='h4' className={styles.logo}>
+                        DFX Dashboard
+                    </Typography>
+                </a>
+            </Link>
 
             {/* Page select */}
             <Container className={styles.navButtons}>
@@ -30,9 +38,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                         {label: 'XSGD-USDC', path: '/pairs/xsgd-usdc'},
                         {label: 'TRYB-USDC', path: '/pairs/tryb-usdc'},
                     ]}
-                    defaultValue='TRYB-USDC'
+                    onClick={() => setNavGroupActive(true)}
+                    navGroupActive={navGroupActive}
                 />
             </Container>
+            
             {children}
         </Container>
     );
