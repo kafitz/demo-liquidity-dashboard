@@ -1,0 +1,17 @@
+.announcementText {
+    display: inline-block;
+    color: white;
+}
+
+.announcementText.date {
+    font-weight: 400;
+    min-width: 100px;
+}
+
+.announcementText.spacer {
+    margin: 0 8px;
+}
+
+.announcementText.headline {
+    font-weight: 700;
+}

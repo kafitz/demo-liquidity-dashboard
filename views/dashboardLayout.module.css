@@ -1,8 +1,14 @@
+.menuBar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
 .logo {
     color: var(--white-color);
-    filter: brightness(0.85);
+    filter: brightness(0.95);
     cursor: pointer;
     text-decoration: none;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navButtons {

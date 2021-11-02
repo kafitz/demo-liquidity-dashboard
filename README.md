@@ -18,4 +18,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 ## Preview
-![Dashboard screenshot](https://i.imgur.com/uYXhRct.png)
+![Overview screenshot](https://i.imgur.com/CJ39p50.png)
+![TRYB pair screenshot](https://i.imgur.com/5dAVZwJ.png)

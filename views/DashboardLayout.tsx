@@ -16,18 +16,21 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     const [navGroupActive, setNavGroupActive] = useState(false);
 
     return (
-        <Container maxWidth={false} sx={{ marginTop: 1 }}>
+        <>
+        <Container maxWidth={false} sx={{ marginTop: 1 }} className={styles.menuBar}>
             <Link href='/'>
                 <a 
                     className={styles.logo}
                     onClick={() => setNavGroupActive(false)}
                 >
                     <Typography variant='h4' className={styles.logo}>
-                        DFX Dashboard
+                        Demo Dashboard
                     </Typography>
                 </a>
             </Link>
 
+        </Container>
+        <Container>
             {/* Page select */}
             <Container className={styles.navButtons}>
                 <NavButtonGroup
@@ -45,6 +48,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             
             {children}
         </Container>
+        </>
     );
 }
 

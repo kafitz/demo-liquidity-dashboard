@@ -1,0 +1,18 @@
+.priceText {
+    color: white;
+    display: inline-block;
+}
+
+.trendingArrow {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.trendingArrow.up {
+    color: lightgreen;
+}
+
+.trendingArrow.down {
+    color: crimson;
+}

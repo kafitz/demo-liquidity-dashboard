@@ -1,7 +1,6 @@
-/* ./components/liquidityPair.tsx */
+/* ./components/text/liquidityPair.tsx */
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-
 
 
 interface LiquidityPairProps {

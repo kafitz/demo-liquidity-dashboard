@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
 import DashboardCard from '../../components/dashboardCard';
 import LineChart from '../../components/lineChart';
-import LiquidityPair from '../../components/liquidityPair';
+import LiquidityPair from '../../components/text/liquidityPair';
 import { BLACKHOLE_ADDRESS, CONTRACTS } from '../../lib/contracts';
 import testTokenData from './testData';
 

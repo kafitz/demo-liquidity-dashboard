@@ -15,7 +15,7 @@ const DashboardCard = (props: DashboardCardProps) => {
     return (
         <Card variant='outlined' className={styles.card}>
             <CardContent>
-                <Typography color='text.secondary' gutterBottom>
+                <Typography gutterBottom className={styles.title}>
                     {props.title}
                 </Typography>
                 {props.children}
