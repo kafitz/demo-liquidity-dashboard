@@ -18,4 +18,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 ## Preview
-![Dashboard screenshot](https://i.imgur.com/5525yUm.png)
+![Dashboard screenshot](https://i.imgur.com/uYXhRct.png)

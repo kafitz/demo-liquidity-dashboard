@@ -1,15 +1,18 @@
 /* ./pages/dashboard.tsx */
+import { GetStaticPropsContext } from 'next';
 import fs from 'fs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import subDays from 'date-fns/subDays';
 
+import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
 import DashboardCard from '../../components/dashboardCard';
 import LineChart from '../../components/lineChart';
 import LiquidityPair from '../../components/liquidityPair';
-import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
 import { BLACKHOLE_ADDRESS, CONTRACTS } from '../../lib/contracts';
-import { GetStaticPropsContext } from 'next';
+import testTokenData from './testData';
+
+import styles from './[id].module.css';
 
 
 
@@ -38,6 +41,7 @@ const PairDashboard = (props: PairDashboardProps) => {
                 <DashboardCard title={'Liquidity (30d)'}>
                     {props.tokenPairs.map((pair, i) => (
                         <LiquidityPair
+                            className={styles.liquidityStats}
                             key={i}
                             name={pair.name}
                             deposit={pair.deposit}
@@ -50,29 +54,19 @@ const PairDashboard = (props: PairDashboardProps) => {
             {/* Chart card */}
             <Grid item xs={12} sm={6} md={8}>
                 <DashboardCard title={'Amount Staked'}>
-                    <Box 
-                        sx={{
-                            height: 440
-                        }}
-                    >
+                    <Box className={styles.chart}>
                         <LineChart
                             data={[
                                 {
                                     id: 'Staking',
                                     data: props.stakingHistory.map(d => {
-                                        return {
-                                            x: new Date(d.timestamp),
-                                            y: d.totalValue
-                                        };
+                                        return { x: new Date(d.timestamp), y: d.totalValue };
                                     })
                                 },
                                 {
                                     id: 'Deposits',
                                     data: props.depositHistory.map(d => {
-                                        return {
-                                            x: new Date(d.timestamp),
-                                            y: d.totalValue
-                                        };
+                                        return { x: new Date(d.timestamp), y: d.totalValue };
                                     })
                                 },                                 
                             ]}
@@ -105,8 +99,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
     const id = context.params!.id as keyof typeof CONTRACTS;  // dangerous, what's recommended?
     // Datetime Params
-    const now = new Date();
-    const startDate = subDays(now, 30);
     const startBlock = 13331168;  // https://www.npmjs.com/package/eth-block-timestamp or binary search
     const endBlock = 13532773;
     // Caching params
@@ -134,36 +126,9 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 
     return {
         props: {
-            tokenPairs: [
-                {
-                    name: 'DFX/ETH',
-                    deposit: 60394.43,
-                    withdraw: 2643.23,
-                }, {
-                    name: 'CADC/USDC',
-                    deposit: 23523.32,
-                    withdraw: 15033.32,
-                }, {
-                    name: 'EURS/USDC',
-                    deposit: 23412.43,
-                    withdraw: 3215.34,                    
-                }, {
-                    name: 'XSGD/USDC',
-                    deposit: 2354.32,
-                    withdraw: 233.45,                    
-                }, {
-                    name: 'NZDS/USDC',
-                    deposit: 5935.35,
-                    withdraw: 8473.41,                    
-                }, {
-                    name: 'TRYB/USDC',
-                    deposit: 1253.54,
-                    withdraw: 6632.23,
-                },       
-            ],
+            tokenPairs: testTokenData.filter(d => d.id === id),
             depositHistory: deposits,
             stakingHistory: stakes,
-            selectedPair: 'TRYB/USDC',
         }
     }
 }

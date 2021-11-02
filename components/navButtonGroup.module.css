@@ -1,0 +1,16 @@
+.nav {
+    color: #BBB;
+}
+
+.nav:hover {
+    color: #FFF;
+    text-shadow: var(--link-text-shadow);
+}
+
+.nav:disabled {
+    color: #999;
+}
+
+.active {
+    color: var(--lightblue-color);
+}
