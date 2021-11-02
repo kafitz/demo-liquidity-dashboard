@@ -2,6 +2,9 @@
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import styles from './liquidityPair.module.css';
+
+
 interface LiquidityPairProps {
     key: string | number;
     name: string;
@@ -11,7 +14,7 @@ interface LiquidityPairProps {
 
 const LiquidityPair = (props: LiquidityPairProps) => {
     return (
-        <Grid container>
+        <Grid container className={styles.row}>
             <Grid item xs={6}>
                 <Typography variant='h5'>
                     {props.name}

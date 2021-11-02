@@ -1,22 +1,31 @@
 html {
-  --black-color: #111111;
-  --white-color: #FEFEFE;
-  --lightblue-color: lightblue;
+    --black-color: #111111;
+    --white-color: #FEFEFE;
+    --lightblue-color: lightblue;
+
+    --link-text-shadow: rgb(0, 232, 241) 0 0 4px;
+
+    background: radial-gradient(farthest-side at 50%, #2196f3, #673AB7 60% 100%);
+    height: 1000px;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.MuiButton-root.nav {
+    color: #BBB;
 }
 
-* {
-  box-sizing: border-box;
+.MuiButton-root.nav:hover {
+    color: #FFF;
+    text-shadow: var(--link-text-shadow);
+}
+
+.MuiButton-root.nav:disabled {
+    color: #999;
 }

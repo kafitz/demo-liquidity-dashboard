@@ -1,3 +1,8 @@
+.logo {
+    color: var(--white-color);
+    filter: brightness(0.85);
+}
+
 .buttonGroup {
     text-align: center;
 }

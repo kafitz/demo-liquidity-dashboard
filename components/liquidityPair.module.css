@@ -1,0 +1,6 @@
+.row {
+    margin: 5px 0;
+    padding: 1px 4px;
+    border: 1px solid rgba(200, 200, 200, 0.8);
+    border-radius: 10px;
+}

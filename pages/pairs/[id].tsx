@@ -32,7 +32,7 @@ interface PairDashboardProps {
 const PairDashboard = (props: PairDashboardProps) => {
     return (
         <>
-        <Grid container>
+        <Grid container spacing={2} sx={{ marginTop: 1 }}>
             {/* Overview card */}
             <Grid item xs={12} sm={6} md={4}>
                 <DashboardCard title={'Liquidity (30d)'}>
@@ -52,7 +52,7 @@ const PairDashboard = (props: PairDashboardProps) => {
                 <DashboardCard title={'Amount Staked'}>
                     <Box 
                         sx={{
-                            height: 384
+                            height: 440
                         }}
                     >
                         <LineChart

@@ -15,8 +15,8 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
-        <>
-            <Typography variant='h2'>
+        <Container maxWidth={false} sx={{ marginTop: 1 }}>
+            <Typography variant='h4' className={styles.logo}>
                 DFX Dashboard
             </Typography>
 
@@ -24,25 +24,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {/* Page select */}
                 <ButtonGroup variant='outlined' aria-label='outlined button group'>
                     <Link href='/pairs/dfx-eth'>
-                        <Button>DFX/ETH</Button>
+                        <Button className='nav' disabled>DFX/ETH</Button>
                     </Link>
                     <Link href='/pairs/cadc-usdc'>
-                        <Button>CADC/USDC</Button>
+                        <Button className='nav' disabled>CADC/USDC</Button>
                     </Link>
                     <Link href='/pairs/eurs-usdc'>    
-                        <Button>EURS/USDC</Button>
+                        <Button className='nav' disabled>EURS/USDC</Button>
                     </Link>
                     <Link href='/pairs/xsgd-usdc'>
-                        <Button>XSGD/USDC</Button>
+                        <Button className='nav' disabled>XSGD/USDC</Button>
                     </Link>
                     <Link href='/pairs/tryb-usdc'>
-                        <Button>TRYB/USDC</Button>
+                        <Button className='nav'>TRYB/USDC</Button>
                     </Link>
                 </ButtonGroup>
             </Container>
         
             {children}
-        </>
+        </Container>
     );
 }
 
