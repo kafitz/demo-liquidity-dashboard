@@ -1,5 +1,5 @@
 /* ./api/etherscan.ts */
-const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';
 
 
 export type EtherscanTokenTx = {

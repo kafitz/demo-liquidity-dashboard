@@ -8,7 +8,7 @@ import DashboardCard from '../../components/dashboardCard';
 import LineChart from '../../components/lineChart';
 import LiquidityPair from '../../components/liquidityPair';
 import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
-import { BLACKHOLE_ADDRESS, CONTRACTS } from './contracts';
+import { BLACKHOLE_ADDRESS, CONTRACTS } from '../../lib/contracts';
 import { GetStaticPropsContext } from 'next';
 
 
@@ -35,9 +35,8 @@ const PairDashboard = (props: PairDashboardProps) => {
         <Grid container>
             {/* Overview card */}
             <Grid item xs={12} sm={6} md={4}>
-                <DashboardCard
-                    title={'Liquidity (30d)'}
-                    children={props.tokenPairs.map((pair, i) => (
+                <DashboardCard title={'Liquidity (30d)'}>
+                    {props.tokenPairs.map((pair, i) => (
                         <LiquidityPair
                             key={i}
                             name={pair.name}
@@ -45,44 +44,41 @@ const PairDashboard = (props: PairDashboardProps) => {
                             withdraw={pair.withdraw}
                         />
                     ))}
-                />
+                </DashboardCard>
             </Grid>
 
             {/* Chart card */}
             <Grid item xs={12} sm={6} md={8}>
-                <DashboardCard
-                    title={'Amount Staked'}
-                    children={
-                        <Box 
-                            sx={{
-                                height: 384
-                            }}
-                        >
-                            <LineChart
-                                data={[
-                                    {
-                                        id: 'Staking',
-                                        data: props.stakingHistory.map(d => {
-                                            return {
-                                                x: new Date(d.timestamp),
-                                                y: d.totalValue
-                                            };
-                                        })
-                                    },
-                                    {
-                                        id: 'Deposits',
-                                        data: props.depositHistory.map(d => {
-                                            return {
-                                                x: new Date(d.timestamp),
-                                                y: d.totalValue
-                                            };
-                                        })
-                                    },                                 
-                                ]}
-                            />
-                        </Box>
-                    }
-                />
+                <DashboardCard title={'Amount Staked'}>
+                    <Box 
+                        sx={{
+                            height: 384
+                        }}
+                    >
+                        <LineChart
+                            data={[
+                                {
+                                    id: 'Staking',
+                                    data: props.stakingHistory.map(d => {
+                                        return {
+                                            x: new Date(d.timestamp),
+                                            y: d.totalValue
+                                        };
+                                    })
+                                },
+                                {
+                                    id: 'Deposits',
+                                    data: props.depositHistory.map(d => {
+                                        return {
+                                            x: new Date(d.timestamp),
+                                            y: d.totalValue
+                                        };
+                                    })
+                                },                                 
+                            ]}
+                        />
+                    </Box>
+                </DashboardCard>
             </Grid>
         </Grid>
         </>

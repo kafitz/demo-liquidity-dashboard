@@ -1,4 +1,4 @@
-/* ./pages/pairs/contracts.ts */
+/* ./lib/contracts.ts */
 
 export const BLACKHOLE_ADDRESS =  '0x0000000000000000000000000000000000000000';
 
