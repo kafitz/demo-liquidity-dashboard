@@ -12,6 +12,7 @@ import { CONTRACTS } from '../../lib/contracts';
 import testTokenData from './testData';
 
 import styles from './[id].module.css';
+import { douglasPeucker } from '../../lib/timeseries';
 
 
 
@@ -21,14 +22,11 @@ type PairLiquidity = {
     withdraw: number;
 };
 
-type DepositLP = FormattedTx;
-type StakeLP = FormattedTx;
-
 interface PairDashboardProps {
     tokenPairs: PairLiquidity[];
     selectedPair: string;
-    depositHistory: DepositLP[];
-    stakingHistory: StakeLP[];
+    depositHistory: FormattedTx[];
+    stakingHistory: FormattedTx[];
 }
 
 const PairDashboard = (props: PairDashboardProps) => {
@@ -100,7 +98,8 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     const transactions = JSON.parse(rawData);
 
     // Format JSON data into Nivo data
-    const deposits: DepositLP[] = formatResponse(transactions.cur1.series).slice(0, 40);
+    const reducedSeries = douglasPeucker(transactions.cur1.series, 50000);
+    const deposits: FormattedTx[] = formatResponse(reducedSeries);
 
     return {
         props: {

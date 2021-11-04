@@ -25,7 +25,7 @@ export type EtherscanTokenTx = {
 };
 
 export type FormattedTx = {
-    timestamp: number;
+    blockNum: number;
     value: number;
     totalValue: number;
 }
@@ -66,13 +66,13 @@ export const formatResponse = (transactions: EtherscanTokenTx[], contractAddress
         if (isStaking) {
             if (item.to === contractAddress) {
                 formattedItems.push({
-                    timestamp,
+                    blockNum: timestamp,
                     value: value,
                     totalValue: lastValue + value
                 });
             } else if (item.from === contractAddress) {
                 formattedItems.push({
-                    timestamp,
+                    blockNum: timestamp,
                     value: -value,
                     totalValue: lastValue - value
                 });
@@ -82,13 +82,13 @@ export const formatResponse = (transactions: EtherscanTokenTx[], contractAddress
         else {
             if (item.from === contractAddress) {
                 formattedItems.push({
-                    timestamp,
+                    blockNum: timestamp,
                     value: value,
                     totalValue: lastValue + value
                 });
             } else if (item.to === contractAddress) {
                 formattedItems.push({
-                    timestamp,
+                    blockNum: timestamp,
                     value: -value,
                     totalValue: lastValue - value
                 });          
