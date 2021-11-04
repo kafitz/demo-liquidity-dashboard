@@ -71,15 +71,15 @@ const Index: NextPage = () => {
                 <Grid item xs={12}>
                     <DashboardCard title={'Recent Updates'}>
                         <Announcement
-                            date={new Date(2022, 4, 22).getTime()}
+                            date={new Date(2022, 3, 22).getTime()}
                             text={'ICE seeks to price commodities with DFX'}
                         />
                         <Announcement
-                            date={new Date(2022, 4, 15).getTime()}
-                            text={'Monthly trade volume averages over $10B'}
+                            date={new Date(2022, 3, 15).getTime()}
+                            text={'Monthly swap volume averages over $10B'}
                         />
                         <Announcement
-                            date={new Date(2022, 4, 3).getTime()}
+                            date={new Date(2022, 3, 3).getTime()}
                             text={'MMXN integration for Mexico peso completed'}
                         />                               
                     </DashboardCard>

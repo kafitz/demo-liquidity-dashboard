@@ -18,5 +18,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 ## Preview
-![Overview screenshot](https://i.imgur.com/CJ39p50.png)
-![TRYB pair screenshot](https://i.imgur.com/5dAVZwJ.png)
+![Overview screenshot](https://i.imgur.com/kP6B5lX.png)
+![CADC pair screenshot](https://i.imgur.com/aU24lZG.png)
+![NZDS pair screenshot](https://i.imgur.com/ud5OqsW.png)
+![TRYB pair screenshot](https://i.imgur.com/uAbCm7Y.png)
+![XSGD pair screenshot](https://i.imgur.com/r4yY8sC.png)
