@@ -38,8 +38,9 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                         {label: 'DFX-ETH', path: '/pairs/dfx-eth'},
                         {label: 'CADC-USDC', path: '/pairs/cadc-usdc'},
                         {label: 'EURS-USDC', path: '/pairs/eurs-usdc'},
-                        {label: 'XSGD-USDC', path: '/pairs/xsgd-usdc'},
+                        {label: 'NZDS-USDC', path: '/pairs/nzds-usdc'},
                         {label: 'TRYB-USDC', path: '/pairs/tryb-usdc'},
+                        {label: 'XSGD-USDC', path: '/pairs/xsgd-usdc'},
                     ]}
                     onClick={() => setNavGroupActive(true)}
                     navGroupActive={navGroupActive}

@@ -14,9 +14,9 @@ const LineChart = (props: LineChartProps) => {
         <ResponsiveLine
             data={props.data}
             margin={{ top: 20, right: 110, bottom: 70, left: 80 }}
-            xScale={{ type: 'time' }}
-            yScale={{ type: 'linear', min: 0, max: 'auto', stacked: false, reverse: false }}
-            yFormat=" >-.2f"
+            // xScale={{ type: 'time' }}
+            // yScale={{ type: 'linear', min: 0, max: 'auto', stacked: false, reverse: false }}
+            // yFormat=" >-.2f"
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -25,7 +25,7 @@ const LineChart = (props: LineChartProps) => {
                 legend: 'Date',
                 legendOffset: 60,
                 legendPosition: 'middle',
-                format: v => format(v, 'MMM d, yyyy')
+                // format: v => format(v, 'MMM d, yyyy')
             }}
             axisLeft={{
                 tickSize: 5,
@@ -34,7 +34,7 @@ const LineChart = (props: LineChartProps) => {
                 legend: 'Total Value ($)',
                 legendOffset: -60,
                 legendPosition: 'middle',
-                format: v => formatCash(v),
+                // format: v => formatCash(v),
             }}
             pointSize={10}
             pointColor={{ theme: 'background' }}

@@ -4,11 +4,11 @@ import fs from 'fs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import { formatResponse, FormattedTx } from '../../api/selfhosted';
+import { fetchContractTransactions, formatResponse, FormattedTx } from '../../api/etherscan';
 import DashboardCard from '../../components/dashboardCard';
 import LineChart from '../../components/lineChart';
 import LiquidityPair from '../../components/text/liquidityPair';
-import { CONTRACTS } from '../../lib/contracts';
+import { BLACKHOLE_ADDRESS, CONTRACTS } from '../../lib/contracts';
 import testTokenData from './testData';
 
 import styles from './[id].module.css';
@@ -52,14 +52,20 @@ const PairDashboard = (props: PairDashboardProps) => {
 
             {/* Chart card */}
             <Grid item xs={12} sm={6} md={8}>
-                <DashboardCard title={'Amount Deposited'}>
+                <DashboardCard title={'Amount Staked'}>
                     <Box className={styles.chart}>
                         <LineChart
                             data={[
                                 {
-                                    id: 'CADC',
+                                    id: 'Staking',
+                                    data: props.stakingHistory.map(d => {
+                                        return { x: new Date(d.timestamp), y: d.totalValue };
+                                    })
+                                },
+                                {
+                                    id: 'Deposits',
                                     data: props.depositHistory.map(d => {
-                                        return { x: d.blockNum, y: d.totalValue };
+                                        return { x: new Date(d.timestamp), y: d.totalValue };
                                     })
                                 },                                 
                             ]}
@@ -78,9 +84,8 @@ export const getStaticPaths = async () => {
         'dfx-eth',
         'cadc-usdc',
         'eurs-usdc',
-        'nzds-usdc',
-        'tryb-usdc',
         'xsgd-usdc',
+        'tryb-usdc',
     ];
 
     const paths = endpoints.map(p => (
@@ -92,20 +97,37 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
     const id = context.params!.id as keyof typeof CONTRACTS;  // dangerous, what's recommended?
+    // Datetime Params
+    const startBlock = 13331168;  // https://www.npmjs.com/package/eth-block-timestamp or binary search
+    const endBlock = 13532773;
     // Caching params
-    const CACHE_FILE = `./${id}-net_positions.json`;
+    const CACHE_FILE = `./${id}-cache.json`;
+    // Contract params
+    const poolContract = CONTRACTS[id].pool;
+    const stakingContract = CONTRACTS[id].staking;
 
-    fs.accessSync(CACHE_FILE, fs.constants.F_OK);
-    const rawData = fs.readFileSync(CACHE_FILE).toString();
-    const transactions = JSON.parse(rawData);
 
+    // Query etherscan for transactions or read from cache if doesn't exist
+    var transactions;
+    try {
+        // read from cache
+        fs.accessSync(CACHE_FILE, fs.constants.F_OK);
+        const rawData = fs.readFileSync(CACHE_FILE).toString();
+        transactions = JSON.parse(rawData);
+    } catch (err) {
+        // fetch from etherscan
+        transactions = await fetchContractTransactions(poolContract, startBlock, endBlock);
+        fs.writeFileSync(CACHE_FILE, JSON.stringify(transactions));
+    }
     // Format JSON data into Nivo data
-    const deposits: DepositLP[] = formatResponse(transactions.cur1.series).slice(0, 40);
+    const deposits: DepositLP[] = formatResponse(transactions, BLACKHOLE_ADDRESS, false);;
+    const stakes: StakeLP[] = formatResponse(transactions, stakingContract, true);
 
     return {
         props: {
             tokenPairs: testTokenData.filter(d => d.id === id),
-            depositHistory: deposits
+            depositHistory: deposits,
+            stakingHistory: stakes,
         }
     }
 }
